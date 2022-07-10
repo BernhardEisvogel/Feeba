@@ -1,13 +1,9 @@
 <?php
 require 'init.php';
 
-if ($_SESSION['conn']->query("USE db726143213") !== TRUE) {
-    echo "Error using database: " . $conn->error;
-}
-
 if(isset($_POST['session']))
     {
-    $sql = "DELETE FROM sessions WHERE date < CURRENT_TIMESTAMP - INTERVAL 180 SECOND";
+    $sql = "DELETE FROM sessions WHERE date < CURRENT_TIMESTAMP - INTERVAL 80 SECOND";
     if ($_SESSION['conn']->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
     }

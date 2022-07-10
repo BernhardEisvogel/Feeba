@@ -1,4 +1,5 @@
 <?php
+// This is the main page for the student. They can fote on the lesson speed.
 require 'init.php';
 $sessionId = "";
 if (!empty($_GET)) {
@@ -9,6 +10,17 @@ if (!empty($_GET)) {
        }
     }
 
+if(isset($_POST['session']))
+    {
+    $sql = "SELECT fast FROM sessions WHERE id ='$sessionId'";
+    $result = $_SESSION['conn']->query($sql);
+    $count = $result->num_rows;
+    if ($count == 0){
+        header('Location: feeba404.html');
+    }
+}else{ 
+    echo("The session number wasn't specified!!");
+}
 ?>
 
 
@@ -22,6 +34,7 @@ if (!empty($_GET)) {
     </script>
     <script>
         function speed(code){
+            alert("Vielen Dank für die Rückmeldung!");
             $.post('setStats.php', {
             speed: code,
             session:"<?php echo($sessionId); ?>"}, 
@@ -57,7 +70,7 @@ if (!empty($_GET)) {
     </div>
 </main>
 <footer>
-    <a href="#" class="impressum">Impressum</a>
+    <a href="impressum.html" class="impressum">Impressum</a>
 </footer>
 </body>
 </html>

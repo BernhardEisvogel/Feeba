@@ -1,6 +1,6 @@
 <?php
 require 'init.php';
-
+// This files stores the student responses in the mySQL database
 function stopIfDangerous($input){
     if (strlen($input) != 4){
         echo ("The code had the wrong size");

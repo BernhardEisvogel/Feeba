@@ -1,4 +1,5 @@
 <?php
+// Creates a new session and shows the corresponding QR code and name
     require 'init.php';
     function getRandomString($n) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -15,7 +16,7 @@
     $sessionid = "";
 
     if (empty($_GET)) {
-        $sessionid = "0X19";//;getRandomString(4);
+        $sessionid = getRandomString(4);
         $sql = "INSERT INTO sessions (id, slow, perfect, fast, solA, solB, solC, solD) VALUES ('$sessionid', 0, 0, 0, 0, 0, 0, 0)";
         if ($_SESSION['conn']->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
@@ -59,21 +60,29 @@
         const fast =  parseInt(dataArray[0]);
         const fine =  parseInt(dataArray[1]);
         const slow =  parseInt(dataArray[2]); 
+        let all = fast + fine + slow;
         
-        var all = fast + fine + slow;
-        if(all == 0){all = 1;}
+        var noResponse = 0;
+        if(all == 0){noResponse = 1;}
         
 
-        const fastPercent = Math.round(fast / all * 100);
-        const finePercent = Math.round(fine / all * 100);
-        const slowPercent = Math.round(slow / all * 100);
-
-        document.getElementById('chart').style = `
+        const fastPercent = Math.round(fast / Math.max(all, noResponse) * 100);
+        const finePercent = Math.round(fine / Math.max(all, noResponse) * 100);
+        const slowPercent = Math.round(slow / Math.max(all, noResponse) * 100);
+        if (noResponse == 0){
+            document.getElementById('chart').style = `
             background: conic-gradient(
-                #00ace8 ${fastPercent}%, 
-                #78caf2 0 ${fastPercent + finePercent}%,
-                #c0e4fa 0
+                #ff0000 ${fastPercent}%, 
+                #78caf2 0 ${(fastPercent + finePercent)}%,
+                #ffff00 0
             )`;
+        }else{
+            document.getElementById('chart').style = `
+            background: conic-gradient(
+                #78caf2 100%,
+                #ffff00 0
+            )`;
+        }
 
         document.getElementById("result_fast").innerText = fast;
         document.getElementById("result_fine").innerText = fine;
@@ -121,15 +130,12 @@
             </span>
         </div>
     </div>
-    <div id="feeba_link_qr" data-link="http://elephant.eisvogel.net/feeba/studentMainPage.php?q=<?php echo ($sessionid);?>"></div>
+    <div id="feeba_link_qr" data-link="<?php echo $_SESSION['domain'];?>studentMainPage.php?q=<?php echo ($sessionid);?>"></div>
     
-    <button onclick="setState('feeba_result')" class="btn">
+    <button onclick="setState('feeba_result')" class="btn feeba_toggle">
                 Weiter
      </button>
     
-    <div class="feeba_link">
-        feeba.de/<?php echo ($sessionid);?>
-    </div>
     <div class="explanation">
         Lasse deinen Teilnehmern den Code oder Link zukommen, damit sie abstimmen können.
     </div>
@@ -142,41 +148,47 @@
         <div class="result_list">
             <div>
                 <span>
-                    <span class="stat_number" id="result_fast"></span> <span>Schülern</span><br/>
+                    <span class="stat_number" id="result_fast"></span> <span>Studenten</span><br/>
                     <span>ist es zu schnell</span>
                 </span>
             </div>
             <div>
                 <span>
-                    <span class="stat_number" id="result_fine"></span> <span>Schülern</span><br/>
+                    <span class="stat_number" id="result_fine"></span> <span>Studenten</span><br/>
                     <span>finden das Tempo genau richtig</span>
                 </span>
             </div>
             <div>
                 <span>
-                    <span class="stat_number" id="result_slow"></span> <span>Schülern</span><br/>
+                    <span class="stat_number" id="result_slow"></span> <span>Studenten</span><br/>
                     <span>langweilen sich</span>
                 </span>
             </div>
         </div>
     </div>
 </main>
-<button onclick="setState('my_feeba')" class="btn">
+<button onclick="setState('my_feeba')" class="btn feeba_toggle">
                 Zurück
      </button>
 <footer>
-    <a href="#" class="impressum">Impressum</a>
+    <a href="impressum.html" class="impressum">Impressum</a>
 </footer>
 
 <script type="text/javascript">
     setCode();
-
-    // initialize qr code
     const element = document.getElementById("feeba_link_qr")
     if (element) {
         const link = element.getAttribute("data-link");
         new QRCode(element, {text: link, colorDark: "#000000"});
     }
+    
+    window.addEventListener("beforeunload", function (e) {
+        $.post('closeSession.php', {
+                    session: "<?php echo($sessionid); ?>"
+                    }, (response) => {
+                        console.log(response);
+            });
+    });
 </script>
 
 </body>

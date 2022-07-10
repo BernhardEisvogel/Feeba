@@ -1,0 +1,268 @@
+* {
+    font-family: sans-serif;
+    color: #00ace8;
+    font-size: 20px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    background: transparent;
+    border: 5px #00ace8 solid;
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-weight: bold;
+}
+
+.btn:active{
+    background: #00ace8;
+}
+
+.btn_full {
+    background: #00ace8;
+    border: 5px #00ace8 solid;
+    border-radius: 30px;
+    color: white;
+    padding: 10px 25px;
+    font-weight: bold;
+}
+
+/* header */
+
+header {
+    display: flex;
+    height: 75px;
+    padding: 10px 30px;
+    align-items: center;
+}
+
+header .logo {
+
+}
+
+header .logo img {
+    width: 300px;
+}
+
+header .center {
+    flex: auto;
+}
+
+header .menu {
+}
+
+/* content */
+
+.content {
+    width: 70%;
+    align-self: center;
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 80px;
+}
+
+.content .header {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    font-size: 66px;
+    margin-bottom: 50px;
+}
+
+.content .main {
+    display: flex;
+    justify-content: center;
+}
+
+.side_code {
+    display: flex;
+}
+
+.side_code .digit {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border: 5px #00ace8 solid;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.side_code .digit input {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 124px;
+    font-weight: bold;
+}
+
+.side_code .digit .digit-value {
+    display: block;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    font-size: 124px;
+    font-weight: bold;
+}
+
+.btn_full.join-survey {
+    margin-top: 30px;
+    display: block;
+    width: 700px;
+}
+
+#feeba_link_qr {
+    margin-top: 20px;
+}
+
+.feeba_link {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+.explanation {
+    text-align: center;
+}
+
+.main .survey {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn.vote {
+    margin-top: 30px;
+    display: block;
+    width: 700px;
+    height: 50px;
+}
+
+
+/* footer */
+
+footer {
+    height: 35px;
+    text-align: center
+}
+
+.impressum {
+    text-decoration: none;
+}
+
+
+
+/* states */
+
+.content.my_feeba {
+    display: none;
+}
+.content.join_feeba {
+    display: none;
+}
+.content.feeba_survey {
+    display: none;
+}
+.content.feeba_result {
+    display: none;
+}
+
+/* state my_feeba */
+.my_feeba header .btn.create {
+    display: none;
+}
+.my_feeba .content.my_feeba {
+    display: flex;
+}
+
+/* state join_feeba */
+.join_feeba header .btn_full.join {
+    display: none;
+}
+.join_feeba .content.join_feeba {
+    display: flex;
+}
+
+/* state feeba_survey */
+.feeba_survey header .btn_full.join {
+    display: none;
+}
+.feeba_survey .content.feeba_survey {
+    display: flex;
+}
+.content.feeba_survey .header {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+/* state feeba_result */
+.feeba_result header .btn.create {
+    display: none;
+}
+.feeba_result header .btn_full.join {
+    display: none;
+}
+.feeba_result .content.feeba_result {
+    display: flex;
+}
+
+.feeba_result .content.feeba_result .stats_wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.feeba_result .content.feeba_result .chart {
+    width: 400px;
+    min-width: 400px;
+    height: 400px;
+    border-radius: 50%;
+}
+.feeba_result .content.feeba_result .result_list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.feeba_result .content.feeba_result .result_list > * {
+    flex: 1;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.feeba_result .content.feeba_result .result_list .stat_number {
+    font-weight: bold;
+}
+
+.feeba_result .content.feeba_result .result_list * {
+    font-size: 40px;
+}
+
+.impressum{
+    align-content: center;
+    text-align: center;
+}
+
+#result_fast{
+    color:#ff0000;
+}
+#result_fine{
+    color:#78caf2;
+}
+#result_slow{
+    color:#ffff00;
+}

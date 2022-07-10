@@ -42,7 +42,7 @@ const getCode = () => {
     </div>
     <div class="center"></div>
     <nav class="menu">
-        <button class="btn create">Eigenes feeba erstellen</button>
+        <button class="btn create" onclick="window.location.href='teacher.php';">Eigenes feeba erstellen</button>
         <button class="btn_full join">Einem feeba beitreten</button>
     </nav>
 </header>
@@ -73,7 +73,7 @@ const getCode = () => {
 </form>
 </main>
 <footer>
-    <a href="#" class="impressum">Impressum</a>
+    <a href="impressum.html" class="impressum">Impressum</a>
 </footer>
 </body>
 </html>
