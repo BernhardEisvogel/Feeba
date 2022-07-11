@@ -2,9 +2,7 @@
 require 'init.php';
 // This files stores the student responses in the mySQL database
 if(isset($_POST['session'])){
-    stopIfDangerous($_POST['session']);
-    $sessionId = $_POST['session'];
-
+    $sessionId  = cleanCode($_POST['session']);
     if(isset($_POST['speed']))
         {
             $speed = $_POST['speed'];

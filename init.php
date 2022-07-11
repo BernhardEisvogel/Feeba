@@ -5,51 +5,39 @@ $username =     $_SESSION['db-user'];
 $password =     $_SESSION['db-pswd'];
 $dbname =       $_SESSION['db-name'];
 // Create connection
-$conn = new mysqli($servername, $username, $password);
-
+$conn = new mysqli($servername, $username, $password, $dbname);
+if($dbname == ""){
+    echo("You have to specify the name of the databse");
+    die();
+}else if($servername = ""){
+    echo("You have to sepecify the mysqli server name");
+    die();
+}else if($password = ""){
+    echo("You have to sepecify the password for the database");
+    die();
+}else if($username = ""){
+    echo("You have to sepecify the user name for the database");
+    die();
+}
 
 // Check connection
 if ($conn->connect_error) {
     echo "Could not connect to the SQL Database";
     die("Connection failed: " . $conn->connect_error);
 }
-/*
- $sql = "DROP DATABASE feebaDB";
-if ($conn->query($sql) !== TRUE) {
-    echo "Error dropping database: " . $conn->error;
-}
-*/
 
-if($dbname == ""){
-    $dbname = "feebaDB";
-    // Check if database exists
-    $mysqli = @new mysqli($servername, $username, $password);
-    $sql    = "SELECT COUNT(*) AS `exists` FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMATA.SCHEMA_NAME='feebaDB'";
-    $query = $mysqli->query($sql);
-    $query = $mysqli->query($sql);
-    $row = $query->fetch_object();
-    $dbExists = (bool) $row->exists;
 
-     if ($dbExists == false){
-         $sql = "CREATE DATABASE feebaDB";
-         if ($conn->query($sql) !== TRUE) {
-             echo "Error creating database: " . $conn->error . "\n";
-         }
-     }
-
-}
 if ($conn->query("USE $dbname") !== TRUE) {
     echo "Error using database: " . $conn->error;
 }
+
+$result = $conn->query("select * from information_schema.tables where table_name='sessions'");
 /*
 $sql = "DROP TABLE sessions";
 if ($conn->query($sql) !== TRUE) {
     echo "Error dropping table: " . $conn->error;
 }
 */
-
-$result = $conn->query("select * from information_schema.tables where table_name='sessions'");
-
 if($result->num_rows == 0) {
         $table = "CREATE TABLE sessions (
         name INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -74,26 +62,16 @@ $_SESSION['db-name'] = $dbname;
 $_SESSION['conn'] = $conn;
 
 // This is the barrier that every input has to pass before it is inserted in the mysql search.
-function stopIfDangerous($input){
-    if (strlen($input) != 4){
-        echo ("The code had the wrong size");
+function cleanCode($name){
+    if (get_magic_quotes_gpc()) {
+        $name = stripslashes($name);
+    }
+    $name = mysqli_real_escape_string($_SESSION['conn'], $name);
+    if (strlen($name) != 4) {
+        echo("The input didn't have the correct length");
         die();
     }
-    $characters = array("/", "(", ")", ",","$", "*");;
-
-        for ($i = 0; $i < 4; $i++) {
-            $allowed = true;
-            for($j = 0; $j<count($characters)-1; $j++){
-                if ($input[$i] == $characters[$j]){
-                    $allowed = false;
-                    break;
-                }
-            }
-            if(!$allowed){
-                echo ("There was a forbidden character in the code");
-                die();
-            }
-        }
+    return $name;
 }
 
 ?>
