@@ -3,4 +3,4 @@ A small website that allows students to give anonymous real time feedback about 
 
 Developped during the 2022 Hack and Harvest Hackathon.
 
-Plug and play, download the files, insert the login data for your MySQl DataBase in CONFIG.php and start.
+Plug and play, download the files, insert the login data for your MySQLi DataBase in CONFIG.php and start.
