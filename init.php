@@ -72,4 +72,28 @@ if($result->num_rows == 0) {
 // Store data for future references;
 $_SESSION['db-name'] = $dbname;
 $_SESSION['conn'] = $conn;
+
+// This is the barrier that every input has to pass before it is inserted in the mysql search.
+function stopIfDangerous($input){
+    if (strlen($input) != 4){
+        echo ("The code had the wrong size");
+        die();
+    }
+    $characters = array("/", "(", ")", ",","$", "*");;
+
+        for ($i = 0; $i < 4; $i++) {
+            $allowed = true;
+            for($j = 0; $j<count($characters)-1; $j++){
+                if ($input[$i] == $characters[$j]){
+                    $allowed = false;
+                    break;
+                }
+            }
+            if(!$allowed){
+                echo ("There was a forbidden character in the code");
+                die();
+            }
+        }
+}
+
 ?>

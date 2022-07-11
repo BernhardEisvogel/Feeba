@@ -166,10 +166,10 @@
             </div>
         </div>
     </div>
-</main>
-<button onclick="setState('my_feeba')" class="btn feeba_toggle">
+    <button onclick="setState('my_feeba')" class="btn feeba_toggle">
                 Zurück
      </button>
+</main>
 <footer>
     <a href="impressum.html" class="impressum">Impressum</a>
 </footer>

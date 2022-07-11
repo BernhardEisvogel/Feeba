@@ -5,13 +5,6 @@
 "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
     </script>
 <script>
-function login() {
-    $.post('studentMainPage.php', {
-            session:'DEFR'}, 
-                   (response) => {
-                console.log(response);
-            });
-}
 
 const setDigitValue = (digit, value) => {
     if (value === '') {
