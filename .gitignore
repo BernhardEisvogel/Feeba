@@ -1,0 +1,2 @@
+#Exclude macOSX display info files
+.DS_Store
