@@ -1,5 +1,5 @@
 <?php
-// This is the main page for the student. They can fote on the lesson speed.
+// This is the main page for the student. They can vote on the lesson speed.
 require 'init.php';
 $sessionId = "";
 if (!empty($_GET)) {
@@ -57,13 +57,13 @@ if(isset($_POST['session']))
     </div>
     <div class="main">
         <div class="survey">
-            <button onclick="speed(1)" class="btn vote">
+            <button onclick="speed(1)" class="btn vote" id="toofast-button">
                 zu schnell
             </button>
-            <button onclick="speed(0)" class="btn vote">
+            <button onclick="speed(0)" class="btn vote" id="rightspeed-button">
                 genau richtig
             </button>
-            <button onclick="speed(-1)" class="btn vote">
+            <button onclick="speed(-1)" class="btn vote" id="tooslow-button">
                 zu langsam
             </button>
         </div>

@@ -152,6 +152,24 @@ header .menu {
     height: 50px;
 }
 
+input#toofast-button {
+    background: #ccc url('icons/rabbit.png') no-repeat top left;
+    padding-left: 16px;
+    height: 16px;
+}
+
+input#rightspeed-button {
+    background: #ccc url('icons/smiley.png') no-repeat top left;
+    padding-left: 16px;
+    height: 16px;
+}
+
+input#tooslow-button {
+    background: #ccc url('icons/snail.png') no-repeat top left;
+    padding-left: 16px;
+    height: 16px;
+}
+
 
 /* footer */
 
