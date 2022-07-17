@@ -148,24 +148,24 @@ header .menu {
 .btn.vote {
     margin-top: 30px;
     display: block;
-    width: 700px;
-    height: 50px;
+    width: 500px;
+    min-height: 100px;
 }
 
-input#toofast-button {
+#toofast-button {
     background: #ccc url('icons/rabbit.png') no-repeat top left;
     padding-left: 16px;
     height: 16px;
 }
 
-input#rightspeed-button {
+#rightspeed-button {
     background: #ccc url('icons/smiley.png') no-repeat top left;
     padding-left: 16px;
     height: 16px;
 }
 
-input#tooslow-button {
-    background: #ccc url('icons/snail.png') no-repeat top left;
+#tooslow-button {
+    background: #ccc url('icons/snail.png') no-repeat center left;
     padding-left: 16px;
     height: 16px;
 }
@@ -193,7 +193,7 @@ footer {
     display: none;
 }
 .content.feeba_survey {
-    display: none;
+    display: inline-block;
 }
 .content.feeba_result {
     display: none;
@@ -283,4 +283,11 @@ footer {
 }
 #result_slow{
     color:#ffff00;
+}
+
+@media screen and (max-width: 850px) {
+  .btn.vote {
+    min-width: 300px;
+    min-height: 100px;
+  }
 }
