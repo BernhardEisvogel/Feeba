@@ -1,7 +1,8 @@
 * {
-    font-family: sans-serif;
+    font-family: 'Kanit';
+    font-weight: 500;
+    font-size: 25px;
     color: #00ace8;
-    font-size: 20px;
 }
 
 html {
@@ -76,7 +77,7 @@ header .menu {
 
 .content .header {
     width: 100%;
-    font-weight: bold;
+    line-height: 115%;
     text-align: center;
     font-size: 66px;
     margin-bottom: 50px;
@@ -150,31 +151,32 @@ header .menu {
     display: block;
     width: 500px;
     min-height: 100px;
+    text-align: center;
 }
 
-#toofast-button {
-    background: #ccc url('icons/rabbit.png') no-repeat top left;
-    padding-left: 16px;
-    height: 16px;
+#button_container { 
+    border-radius:5px;
+    float:left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#rightspeed-button {
-    background: #ccc url('icons/smiley.png') no-repeat top left;
-    padding-left: 16px;
-    height: 16px;
+#button_img_wrap {
+    float:left;
 }
 
-#tooslow-button {
-    background: #ccc url('icons/snail.png') no-repeat center left;
-    padding-left: 16px;
-    height: 16px;
+#button_text_wrap {
+    margin-left: 70px;
+    float:left;
+    text-align:center;
 }
 
 
 /* footer */
 
 footer {
-    height: 35px;
+    height: 50px;
     text-align: center
 }
 
@@ -273,6 +275,18 @@ footer {
 .impressum{
     align-content: center;
     text-align: center;
+}
+
+#impressum_headings {
+    font-size: 40px;
+    font-weight: 270;
+    margin-bottom: 10px;
+}
+
+#sorry_404 {
+    font-size: 70px;
+    font-weight: 270;
+    margin-bottom: 10px;
 }
 
 #result_fast{

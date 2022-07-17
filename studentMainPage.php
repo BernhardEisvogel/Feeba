@@ -56,15 +56,36 @@ if(isset($_POST['session']))
         Wie ist die Unterrichtsgeschwindigkeit für dich?
     </div>
     <div class="main">
-        <div class="survey">
-            <button onclick="speed(1)" class="btn vote" id="toofast-button">
-                zu schnell
+    <div class="survey">
+            <button onclick="speed(1)" class="btn vote">
+                <div id="button_container">
+                    <div id="button_img_wrap">
+                        <img src="icons/rabbit.png" width="69" height="69" />
+                    </div>
+                    <div id="button_text_wrap">
+                        zu schnell
+                    </div>
+                </div>
             </button>
-            <button onclick="speed(0)" class="btn vote" id="rightspeed-button">
-                genau richtig
+            <button onclick="speed(0)" class="btn vote">
+                <div id="button_container">
+                    <div id="button_img_wrap">
+                        <img src="icons/smiley.png" width="69" height="69" />
+                    </div>
+                    <div id="button_text_wrap">
+                        genau richtig
+                    </div>
+                </div>
             </button>
-            <button onclick="speed(-1)" class="btn vote" id="tooslow-button">
-                zu langsam
+            <button onclick="speed(-1)" class="btn vote">
+                <div id="button_container">
+                    <div id="button_img_wrap">
+                        <img src="icons/snail.png" width="69" height="69" />
+                    </div>
+                    <div id="button_text_wrap">
+                        zu langsam
+                    </div>
+                </div>
             </button>
         </div>
     </div>
