@@ -60,7 +60,7 @@ if(isset($_POST['session']))
             <button onclick="speed(1)" class="btn vote">
                 <div id="button_container">
                     <div id="button_img_wrap">
-                        <img src="icons/rabbit.png" width="69" height="69" />
+                        <img src="icons/rabbit.png" width="30" height="30" />
                     </div>
                     <div id="button_text_wrap">
                         zu schnell
@@ -70,7 +70,7 @@ if(isset($_POST['session']))
             <button onclick="speed(0)" class="btn vote">
                 <div id="button_container">
                     <div id="button_img_wrap">
-                        <img src="icons/smiley.png" width="69" height="69" />
+                        <img src="icons/smiley.png" width="30" height="30" />
                     </div>
                     <div id="button_text_wrap">
                         genau richtig
@@ -80,7 +80,7 @@ if(isset($_POST['session']))
             <button onclick="speed(-1)" class="btn vote">
                 <div id="button_container">
                     <div id="button_img_wrap">
-                        <img src="icons/snail.png" width="69" height="69" />
+                        <img src="icons/snail.png" width="45" height="30" />
                     </div>
                     <div id="button_text_wrap">
                         zu langsam
