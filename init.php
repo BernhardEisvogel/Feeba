@@ -34,8 +34,17 @@ if ($conn->query("USE $dbname") !== TRUE) {
 $result_sessions = $conn->query("select * from information_schema.tables where table_name='sessions'");
 $result_spresp = $conn->query("select * from information_schema.tables where table_name='spresp'");
 $result_quresp = $conn->query("select * from information_schema.tables where table_name='quresp'");
+
 /*
 $sql = "DROP TABLE sessions";
+if ($conn->query($sql) !== TRUE) {
+    echo "Error dropping table: " . $conn->error;
+}
+$sql = "DROP TABLE spresp";
+if ($conn->query($sql) !== TRUE) {
+    echo "Error dropping table: " . $conn->error;
+}
+$sql = "DROP TABLE quresp";
 if ($conn->query($sql) !== TRUE) {
     echo "Error dropping table: " . $conn->error;
 }
@@ -59,7 +68,7 @@ if($result_spresp->num_rows == 0) {
         $table = "CREATE TABLE spresp (
         name INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         session CHAR(4),
-        mode SMALLINT UNSIGNED,
+        speed SMALLINT,
         date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         if ($conn->query($table) !== TRUE) {

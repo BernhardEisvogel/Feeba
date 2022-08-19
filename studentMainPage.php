@@ -12,7 +12,7 @@ if (!empty($_GET)) {
 
 if(isset($_POST['session']))
     {
-    $sql = "SELECT fast FROM sessions WHERE id ='$sessionId'";
+    $sql = "SELECT * FROM sessions WHERE id ='$sessionId'";
     $result = $_SESSION['conn']->query($sql);
     $count = $result->num_rows;
     if ($count == 0){
@@ -26,6 +26,7 @@ if(isset($_POST['session']))
 
 <html class="feeba_survey">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Echtzeit Klassen Feedback</title>
     <link rel="stylesheet" href="styles.css" />
     <!-- jQuery Ajax CDN -->
@@ -52,7 +53,7 @@ if(isset($_POST['session']))
     </div>
 </header>
 <main class="content feeba_survey">
-    <div class="header">
+    <div>
         Wie ist die Unterrichtsgeschwindigkeit für dich?
     </div>
     <div class="main">

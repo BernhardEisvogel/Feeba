@@ -17,18 +17,17 @@
 
     if (empty($_GET)) {
         $sessionid = getRandomString(4);
-        $sql = "INSERT INTO sessions (id, slow, perfect, fast, solA, solB, solC, solD) VALUES ('$sessionid', 0, 0, 0, 0, 0, 0, 0)";
+        $sql = "INSERT INTO sessions (id, mode) VALUES ('$sessionid', 0)";
         if ($_SESSION['conn']->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
         }
         
     }else{
         $sessionid = $_GET["q"];
-        $sql = "SELECT slow FROM sessions WHERE id ='$sessionid' ";
+        $sql = "INSERT INTO sessions (id, mode) VALUES ('$sessionid', 0)";
         if ($_SESSION['conn']->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
         }
-        echo($sql);
     }
 ?>
 
@@ -130,11 +129,11 @@
             </span>
         </div>
     </div>
-    <div id="feeba_link_qr" data-link="<?php echo $_SESSION['domain'];?>studentMainPage.php?q=<?php echo ($sessionid);?>"></div>
+    <div id="feeba_link_qr" data-link="<?php echo $_SESSION['domain'];?>/studentMainPage.php?q=<?php echo ($sessionid);?>"></div>
     
     <button onclick="setState('feeba_result')" class="btn feeba_toggle">
                 Weiter
-     </button>
+    </button>
     
     <div class="explanation">
         Lasse deinen Teilnehmern den Code oder Link zukommen, damit sie abstimmen können.

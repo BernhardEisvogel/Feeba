@@ -8,14 +8,16 @@ if(isset($_POST['session'])){
             $speed = $_POST['speed'];
             $sql = "";
             if ($speed == -1){
-                $sql = "INSERT INTO sessions (id, slow, perfect, fast, solA, solB, solC, solD) VALUES ('$sessionId', 1, 0, 0, 0, 0, 0, 0)";
+                $sql = "INSERT INTO spresp (session, speed) VALUES ('$sessionId', 0)";
             }else if($speed == 0){
-                $sql = "INSERT INTO sessions (id, slow, perfect, fast, solA, solB, solC, solD) VALUES ('$sessionId', 0, 1, 0, 0, 0, 0, 0)";
+                $sql = "INSERT INTO spresp (session, speed) VALUES ('$sessionId', 1)";
             }else{
-                $sql = "INSERT INTO sessions (id, slow, perfect, fast, solA, solB, solC, solD) VALUES ('$sessionId', 0, 0, 1, 0, 0, 0, 0)";
+                $sql = "INSERT INTO spresp (session, speed) VALUES ('$sessionId', 2)";
             }
             if ($_SESSION['conn']->query($sql) !== TRUE) {
                 echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
+            }else{
+                echo $speed;
             }
         }
 }

@@ -3,24 +3,34 @@ require 'init.php';
 
 if(isset($_POST['session']))
     {
-    $sql = "DELETE FROM sessions WHERE date < CURRENT_TIMESTAMP - INTERVAL 80 SECOND";
+    $sql = "DELETE FROM spresp WHERE date < CURRENT_TIMESTAMP - INTERVAL 80 SECOND";
     if ($_SESSION['conn']->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
     }
+    $sessionid = cleanCode($_POST['session']);
+    $sql_speed = "SELECT speed FROM spresp WHERE session ='$sessionid'";
+    $result_speed = $_SESSION['conn']->query($sql_speed);
+    if (!$result_speed) {
+    $message  = 'Invalid query: ' . $conn->error . "\n";
+    $message = 'Whole query: ' . $query;
+    die($message);
+    }
     
-    $sessionid = $_POST['session'];
-    $sql_fast = "SELECT fast FROM sessions WHERE id ='$sessionid' AND fast = '1'";
-    $sql_slow = "SELECT slow FROM sessions WHERE id ='$sessionid' AND slow = '1'";
-    $sql_perfect = "SELECT perfect FROM sessions WHERE id ='$sessionid' AND perfect = '1'";
-    $result_fast = $_SESSION['conn']->query($sql_fast);
-    $result_slow = $_SESSION['conn']->query($sql_slow);
-    $result_perfect = $_SESSION['conn']->query($sql_perfect);
+    $count_perfect = 0;
+    $count_fast = 0;
+    $count_slow = 0;
     
-    $count_perfect = $result_perfect->num_rows;
-    $count_fast = $result_fast->num_rows;
-    $count_slow = $result_slow->num_rows;
+    while ($value = $result_speed->fetch_row()) {
+        if ($value[0] == 0){
+            $count_slow= $count_slow + 1;
+        } elseif ($value[0] == 1) {
+            $count_perfect= $count_perfect + 1;
+        } else {
+            $count_fast= $count_fast + 1;
+        }
+    }
     echo $count_fast . ";".$count_perfect.";" . $count_slow ;
 }else{ 
-    echo("-1");
+    echo("The session id wasn't set!");
 }
 ?>

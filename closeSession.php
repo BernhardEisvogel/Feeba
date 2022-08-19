@@ -9,7 +9,14 @@ if ($_SESSION['conn']->query("USE $dbname") !== TRUE) {
 if(isset($_POST['session']))
     {
     $sessionid = cleanCode($_POST['session']);
-    $sql = "DELETE FROM sessions WHERE WHERE id ='$sessionid'";
+    $sql = "DELETE FROM sessions WHERE id ='$sessionid'";
+    if ($_SESSION['conn']->query($sql) !== TRUE) {
+            echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
+    }else{
+        echo "Session Closed successfully";
+        die();
+    }
+    $sql = "DELETE FROM spresp WHERE session ='$sessionid'";
     if ($_SESSION['conn']->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $_SESSION['conn']->error;
     }else{
