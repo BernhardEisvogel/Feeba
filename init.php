@@ -31,24 +31,48 @@ if ($conn->query("USE $dbname") !== TRUE) {
     echo "Error using database: " . $conn->error;
 }
 
-$result = $conn->query("select * from information_schema.tables where table_name='sessions'");
+$result_sessions = $conn->query("select * from information_schema.tables where table_name='sessions'");
+$result_spresp = $conn->query("select * from information_schema.tables where table_name='spresp'");
+$result_quresp = $conn->query("select * from information_schema.tables where table_name='quresp'");
 /*
 $sql = "DROP TABLE sessions";
 if ($conn->query($sql) !== TRUE) {
     echo "Error dropping table: " . $conn->error;
 }
 */
-if($result->num_rows == 0) {
+
+// Create tables if they don't exist
+if($result_sessions->num_rows == 0) {
         $table = "CREATE TABLE sessions (
         name INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         id CHAR(4),
-        slow SMALLINT UNSIGNED,
-        perfect SMALLINT UNSIGNED,
-        fast SMALLINT UNSIGNED,
-        solA SMALLINT UNSIGNED,
-        solB SMALLINT UNSIGNED,
-        solC SMALLINT UNSIGNED,
-        solD SMALLINT UNSIGNED,
+        mode SMALLINT UNSIGNED,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )";
+        if ($conn->query($table) !== TRUE) {
+          echo "There was an error creating the table". $conn->error;
+        }
+    
+    
+}
+if($result_spresp->num_rows == 0) {
+        $table = "CREATE TABLE spresp (
+        name INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        session CHAR(4),
+        mode SMALLINT UNSIGNED,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )";
+        if ($conn->query($table) !== TRUE) {
+          echo "There was an error creating the table". $conn->error;
+        }
+    
+    
+}
+if($result_quresp->num_rows == 0) {
+        $table = "CREATE TABLE quresp (
+        name INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        session CHAR(4),
+        answer SMALLINT UNSIGNED,
         date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         if ($conn->query($table) !== TRUE) {
